@@ -31,4 +31,24 @@ async function addData() {
     console.log(newData)
 }
 
-addData()
+async function askUser() {
+    const choice = await prompts({
+        type: 'number',
+        name: 'value',
+        message: 'What will you do?'
+    })
+    switch (choice.value) {
+        case 0:
+            process.exit();
+
+        case 1:
+            addData()
+            break;
+    
+        default:
+            console.log('Please input a number!')
+            return askUser()
+    }
+}
+
+askUser()
